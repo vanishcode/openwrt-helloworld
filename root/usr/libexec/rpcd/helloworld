@@ -1,0 +1,23 @@
+#!/bin/sh
+
+case "$1" in
+    list)
+        # 声明供前端调用的 ubus 方法及其参数类型
+        echo '{ "set_text": { "text": "string" } }'
+        ;;
+    call)
+        case "$2" in
+            set_text)
+                # 解析前端传来的 JSON 数据并调用 C++ 程序
+                read input
+                text=$(echo "$input" | jsonfilter -e '@.text')
+
+                # 执行 C++ 二进制文件
+                /usr/bin/helloworld "$text"
+                
+                # 返回 JSON 格式的成功响应
+                echo '{ "status": "ok" }'
+                ;;
+        esac
+        ;;
+esac

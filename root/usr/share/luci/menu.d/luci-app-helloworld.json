@@ -1,0 +1,13 @@
+{
+    "admin/services/helloworld": {
+        "title": "HelloWorld",
+        "action": {
+            "type": "view",
+            "path": "/helloworld/main"
+        },
+        "depends": {
+            "acl": [ "luci-app-helloworld" ]
+        },
+        "order": 99
+    }
+}
